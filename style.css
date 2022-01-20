@@ -1,0 +1,58 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.board {
+  display: inline-block;
+  flex-direction: column;
+  user-select: none;
+  border: 1px solid #000;
+}
+
+.board.disabled {
+  pointer-events: none;
+}
+
+.row {
+  display: flex;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 2.5rem;
+  margin-right: 2.5rem;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.settings div {
+  display: flex;
+  align-items: center;
+}
+
+.settings div label {
+  width: 135px;
+}
+
+.win-info {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.win-info p {
+  margin-right: 1rem;
+}
