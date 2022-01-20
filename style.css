@@ -44,7 +44,26 @@ body {
 }
 
 .settings div label {
-  width: 135px;
+  width: 200px;
+}
+
+.settings div button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.settings div button:hover {
+  background: #f7f7f7;
+}
+
+.settings div button:active {
+  scale: 0.98;
 }
 
 .win-info {
@@ -55,4 +74,22 @@ body {
 
 .win-info p {
   margin-right: 1rem;
+}
+
+.win-info button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.win-info button:hover {
+  background: #f7f7f7;
+}
+
+.win-info button:active {
+  scale: 0.98;
 }

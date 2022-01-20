@@ -19,15 +19,22 @@
     <div class="settings">
         <div>
             <label for="boardSize" id="boardSizeLabel">Board Size (10)</label>
-            <input type="range" min=3 max=50 id="boardSize" value=10>
+            <input type="range" min=3 max=75 id="boardSize" value=10>
         </div>
         <div>
             <label for="squareSize" id="squareSizeLabel">Square Size (50)</label>
-            <input type="range" min=5 max=100 id="squareSize" value=50>
+            <input type="range" min=5 max=200 id="squareSize" value=50>
         </div>
         <div>
             <label for="pointsToWin" id="pointsToWinLabel">Points to Win (5)</label>
             <input type="range" min=3 max=10 id="pointsToWin" value=5>
+        </div>
+        <div>
+            <label for="recapSpeed" id="recapSpeedLabel">Recap speed (500 ms)</label>
+            <input type="range" min=100 max=10000 id="recapSpeed" value=500>
+        </div>
+        <div>
+            <button id="defaultSettingsValues">Default values</button>
         </div>
     </div>
     <div class="win-info"></div>

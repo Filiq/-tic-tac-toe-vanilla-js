@@ -1,12 +1,12 @@
 const players = {
   one: {
     active: true,
-    moves: []
+    moves: [],
   },
   two: {
     active: false,
-    moves: []
-  }
+    moves: [],
+  },
 };
 
 const board = document.querySelector(".board");
@@ -14,9 +14,12 @@ const winInfo = document.querySelector(".win-info");
 const boardSizeInput = document.getElementById("boardSize");
 const squareSizeInput = document.getElementById("squareSize");
 const pointsToWinInput = document.getElementById("pointsToWin");
+const recapSpeedInput = document.getElementById("recapSpeed");
 const boardSizeLabel = document.getElementById("boardSizeLabel");
 const squareSizeLabel = document.getElementById("squareSizeLabel");
 const pointsToWinLabel = document.getElementById("pointsToWinLabel");
+const recapSpeedLabel = document.getElementById("recapSpeedLabel");
+const defaultSettingsValue = document.getElementById("defaultSettingsValues");
 
 boardSizeInput.addEventListener("input", (e) => {
   n = Number(e.target.value);
@@ -45,10 +48,40 @@ pointsToWinInput.addEventListener("input", (e) => {
   resetBoard();
 });
 
+recapSpeedInput.addEventListener("input", (e) => {
+  recapSpeed = Number(e.target.value);
+
+  recapSpeedLabel.textContent = `Recap speed (${recapSpeed} ms)`;
+});
+
+defaultSettingsValue.addEventListener("click", () => {
+  if (n === 10 && squareSize === 50 && minToWin === 5 && recapSpeed === 500)
+    return;
+
+  n = 10;
+  squareSize = 50;
+  minToWin = 5;
+  recapSpeed = 500;
+
+  boardSizeInput.value = n;
+  squareSizeInput.value = squareSize;
+  pointsToWinInput.value = minToWin;
+  recapSpeedInput.value = recapSpeed;
+
+  boardSizeLabel.textContent = `Board Size (${n})`;
+  squareSizeLabel.textContent = `Square Size (${squareSize})`;
+  pointsToWinLabel.textContent = `Points to Win (${minToWin})`;
+  recapSpeedLabel.textContent = `Recap speed (${recapSpeed} ms)`;
+
+  createBoard();
+  resetBoard();
+});
+
 let gameState = [];
 let n = 10;
 let squareSize = 50;
 let minToWin = 5;
+let recapSpeed = 500;
 let moves = 0;
 
 createBoard();
@@ -113,7 +146,7 @@ function createBoard() {
         e.target.classList.add("cross");
 
         gameState[position] = "x";
-        players.two.moves.push(position)
+        players.two.moves.push(position);
 
         players.one.active = true;
         players.two.active = false;
@@ -130,16 +163,11 @@ function checkWin() {
     winMsg.textContent = players.one ? "Red won" : "Blue won";
 
     const recapBtn = document.createElement("button");
-    recapBtn.style.fontFamily = "inherit";
-    recapBtn.style.padding = "0.5rem 1rem";
-    recapBtn.style.cursor = "pointer";
     recapBtn.textContent = "RECAP";
+    recapBtn.style.marginRight = "10px";
     recapBtn.onclick = () => recapBoard();
 
     const resetBtn = document.createElement("button");
-    resetBtn.style.fontFamily = "inherit";
-    resetBtn.style.padding = "0.5rem 1rem";
-    resetBtn.style.cursor = "pointer";
     resetBtn.textContent = "RESET";
     resetBtn.onclick = () => resetBoard();
 
@@ -300,21 +328,22 @@ function resetBoard() {
   enableBoard();
 }
 
-function recapBoard(){
+function recapBoard() {
   board.innerHTML = "";
   gameState = [];
   createBoard();
 
   let o = 0;
   let x = 0;
+  movesOrdered = [];
 
-  for(let i = 0; i < moves; i++){
-    if(i % 2 === 0){
+  for (let i = 0; i < moves; i++) {
+    if (i % 2 === 0) {
       movesOrdered.push(players.one.moves[o]);
-      o++
+      o++;
     } else {
       movesOrdered.push(players.two.moves[x]);
-      x++
+      x++;
     }
   }
 
@@ -337,7 +366,7 @@ function recapBoard(){
   redCross.style.userSelect = "none";
 
   setInterval(() => {
-    if(i % 2 === 0){
+    if (i % 2 === 0) {
       squares[movesOrdered[i]].appendChild(blueCircle.cloneNode(true));
       squares[movesOrdered[i]].classList.add("circle");
     } else {
@@ -346,5 +375,5 @@ function recapBoard(){
     }
 
     i++;
-  }, 500)
+  }, recapSpeed);
 }
